@@ -1,0 +1,23 @@
+{
+  "name": "examen-p-w",
+  "version": "1.0.0",
+  "description": "Examen",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eduardo-Quisupangui/Examen-P-W.git"
+  },
+  "author": "Eduardo Quisupangui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eduardo-Quisupangui/Examen-P-W/issues"
+  },
+  "homepage": "https://github.com/Eduardo-Quisupangui/Examen-P-W#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "yargs": "^15.3.1"
+  }
+}
