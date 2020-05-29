@@ -28,58 +28,60 @@ const lecturacsv = async(file) => {
 
 let mostrar = async(archivo, anio, pais) => {
 
+    let lista_mostrar = await mos(archivo, anio, pais)
 
-    //let doc = await lecturacsv(archivo);
-    //let colum = await columna07(file, year)
-    //console.log(doc);
-    console.log(anio);
-    console.log("llamada metodo", await columna07(archivo, anio));
-    //console.log(tareaPorHAcer);
-    // let val = await validar(country, year);
+    for (let j = 0; j < 4; j++) {
 
-    let est = {
-        //MiVector: await columna07(file, year)
-        // Menor_Mayor: await media(country, year),
-        // Menores: await menores(country, year),
-        // Mayores: await mayores(country, year),
-        // top5: await topcinco(year)
-    };
+        console.log(lista_mostrar[j]);
 
-    return est;
-
+    }
+}
+let guardar = async(archivo, anio, pais) => {
+    console.log(await gua(archivo, anio, pais));
 }
 
-const columna07 = async(archivo, anio) => {
-    let vectorparajason = [];
+const mos = async(archivo, anio) => {
+
+    let lista = []
     let doc = await lecturacsv(archivo);
-    console.log("dd", doc);
-    console.log(anio);
-    console.log("dato", tareaPorHAcer[4][5], "_");
+    console.log("año: ", anio);
+
 
     for (let i = 0; i < 65; i++) {
-        //console.log(year, "==", tareaPorHAcer[3][i]);
-        //console.log("i:", tareaPorHAcer[3][i]);
-        // console.log(anio.toString() === tareaPorHAcer[3][i]);
+
         if (anio.toString() === tareaPorHAcer[3][i]) {
-            console.log("1", tareaPorHAcer[i][2]);
-            console.log("2", tareaPorHAcer[i][0]);
-            console.log("3", tareaPorHAcer[3][i]);
-            console.log("4", tareaPorHAcer[6][i]);
 
-            console.log("5", tareaPorHAcer[i][i]);
+            lista = [`Datos: ${tareaPorHAcer[i][2]}`, `Pais: ${tareaPorHAcer[i][0]}`,
+                `Año: ${tareaPorHAcer[3][i]}`, `Valor: ${tareaPorHAcer[i][i]}`, `${tareaPorHAcer[i][1]}`, `${tareaPorHAcer[3][i]}`
+            ]
 
-            // for (let j = 3; j < tareaPorHAcer.length; j++) {
-            //     vectorparajason.push(tareaPorHAcer[j][i]);
-
-            // }
         }
 
     }
-    return vectorparajason;
+    return lista;
 
 };
 
+const gua = async(archivo, anio, pais) => {
+    let lista_buscada = (await mos(archivo, anio, pais));
+    let lista_guardar = [];
+    for (let j = 0; j < 4; j++) {
+        lista_guardar.push(lista_buscada[j]);
+
+    }
+
+    fs.appendFile(`./resultados/${lista_buscada[4]}-${lista_buscada[5]}.txt`, lista_guardar, (error) => {
+        if (error) {
+            throw error;
+        }
+        console.log("se creo el archivo");
+    });
+
+}
+
+
 module.exports = {
     mostrar,
+    guardar
 
 }
