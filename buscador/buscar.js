@@ -32,7 +32,7 @@ let mostrar = async(archivo, anio, pais) => {
 
     for (let j = 0; j < 4; j++) {
 
-        console.log(lista_mostrar[j]);
+        console.log(colors.green(lista_mostrar[j]));
 
     }
 }
@@ -44,7 +44,7 @@ const mos = async(archivo, anio, pais) => {
 
     let lista = []
     let doc = await lecturacsv(archivo);
-    console.log("año: ", anio);
+    console.log("año: ", anio, );
     console.log("pais: ", pais);
     try {
         for (let j = 4; j < 269; j++) {
@@ -82,6 +82,7 @@ const gua = async(archivo, anio, pais) => {
     let lista_guardar = [];
     for (let j = 0; j < 4; j++) {
         lista_guardar.push(lista_buscada[j]);
+        console.log(colors.blue(lista_guardar[j]));
 
     }
 
