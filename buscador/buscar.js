@@ -12,44 +12,29 @@ const lecturacsv = async(file) => {
         .pipe(csv({ cast: true, delimiter: ';' }))
     for await (const row of g) {
         //console.log(g.length);
-        for (let i = 4; i < 65; i++) {
+        for (let i = 4; i < 295; i++) {
             if (row[i] == "" || row[i] == " " || row[i] == "") {
                 row[i] = "0";
             }
         }
         tareaPorHAcer.push(row);
     }
-
+    //console.log(tareaPorHAcer);
     return 'Se ha terminado de leer el archivo';
 };
 
-//const fs = require("fs"); // filesystem
-// const srv = require("../vista/servidor");
-//const est = require("./calculos");
-//const pag = require("./config/lista");
-//let tareaPorHAcer = [];
-
-const guardar = (file, country, year) => {
-    mostrar(file, country, year).then(v => escribirtxt(v, year)).catch(msg => console.log(msg.message));
-};
-//Guardando en json
-const escribirtxt = (vect, year) => {
-    let data = JSON.stringify(vect);
-    fs.writeFile(`./resultado/${year}.txt`, data, (err) => {
-        if (err) throw new Error("No se pudo grabar", err);
-    });
-};
 
 
 
-let mostrar = async(file, country, year) => {
+let mostrar = async(archivo, anio, pais) => {
 
 
-    let doc = await lecturacsv(file);
+    //let doc = await lecturacsv(archivo);
     //let colum = await columna07(file, year)
-    console.log(doc);
-    console.log("lllll", await columna07(file, year));
-    console.log(tareaPorHAcer);
+    //console.log(doc);
+    console.log(anio);
+    console.log("llamada metodo", await columna07(archivo, anio));
+    //console.log(tareaPorHAcer);
     // let val = await validar(country, year);
 
     let est = {
@@ -64,17 +49,29 @@ let mostrar = async(file, country, year) => {
 
 }
 
-const columna07 = async(file, year) => {
+const columna07 = async(archivo, anio) => {
     let vectorparajason = [];
-    let doc = await lecturacsv(file);
-    for (let i = 3; i < 65; i++) {
+    let doc = await lecturacsv(archivo);
+    console.log("dd", doc);
+    console.log(anio);
+    console.log("dato", tareaPorHAcer[4][5], "_");
+
+    for (let i = 0; i < 65; i++) {
         //console.log(year, "==", tareaPorHAcer[3][i]);
-        if (year.toString() === tareaPorHAcer[3][i]) {
+        //console.log("i:", tareaPorHAcer[3][i]);
+        // console.log(anio.toString() === tareaPorHAcer[3][i]);
+        if (anio.toString() === tareaPorHAcer[3][i]) {
+            console.log("1", tareaPorHAcer[i][2]);
+            console.log("2", tareaPorHAcer[i][0]);
+            console.log("3", tareaPorHAcer[3][i]);
+            console.log("4", tareaPorHAcer[6][i]);
 
-            for (let j = 3; j < tareaPorHAcer.length; j++) {
-                vectorparajason.push(tareaPorHAcer[j][i]);
+            console.log("5", tareaPorHAcer[i][i]);
 
-            }
+            // for (let j = 3; j < tareaPorHAcer.length; j++) {
+            //     vectorparajason.push(tareaPorHAcer[j][i]);
+
+            // }
         }
 
     }
@@ -84,6 +81,5 @@ const columna07 = async(file, year) => {
 
 module.exports = {
     mostrar,
-    guardar
 
 }
