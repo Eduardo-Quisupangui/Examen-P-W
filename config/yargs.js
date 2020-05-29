@@ -24,6 +24,7 @@ const argv = require("yargs")
         archivo,
         anio,
         pais,
+
     }).argv;
 module.exports = {
     argv,

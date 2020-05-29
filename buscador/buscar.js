@@ -12,7 +12,7 @@ const lecturacsv = async(file) => {
         .pipe(csv({ cast: true, delimiter: ';' }))
     for await (const row of g) {
         //console.log(g.length);
-        for (let i = 4; i < 295; i++) {
+        for (let i = 4; i < 269; i++) {
             if (row[i] == "" || row[i] == " " || row[i] == "") {
                 row[i] = "0";
             }
@@ -40,27 +40,42 @@ let guardar = async(archivo, anio, pais) => {
     console.log(await gua(archivo, anio, pais));
 }
 
-const mos = async(archivo, anio) => {
+const mos = async(archivo, anio, pais) => {
 
     let lista = []
     let doc = await lecturacsv(archivo);
     console.log("año: ", anio);
+    console.log("pais: ", pais);
+    try {
+        for (let j = 4; j < 269; j++) {
+            for (let i = 0; i < 65; i++) {
+                if ((anio.toString() === tareaPorHAcer[3][i]) && (pais.toString() === tareaPorHAcer[j][1])) {
+                    if ((tareaPorHAcer[j][1] !== undefined)) {
+                        lista = [`Datos: ${tareaPorHAcer[j][2]}`, `Pais: ${tareaPorHAcer[j][0]}`,
+                            `Año: ${tareaPorHAcer[3][i]}`, `Valor: ${tareaPorHAcer[j][i]}`, `${tareaPorHAcer[j][1]}`, `${tareaPorHAcer[3][i]}`
+                        ]
+
+                    }
 
 
-    for (let i = 0; i < 65; i++) {
+                }
 
-        if (anio.toString() === tareaPorHAcer[3][i]) {
-
-            lista = [`Datos: ${tareaPorHAcer[i][2]}`, `Pais: ${tareaPorHAcer[i][0]}`,
-                `Año: ${tareaPorHAcer[3][i]}`, `Valor: ${tareaPorHAcer[i][i]}`, `${tareaPorHAcer[i][1]}`, `${tareaPorHAcer[3][i]}`
-            ]
-
+            }
         }
-
+    } catch (e) {
+        console.log("entering catch block");
+        console.log(e);
+        console.log("leaving catch block");
     }
+
+
     return lista;
 
 };
+
+
+
+
 
 const gua = async(archivo, anio, pais) => {
     let lista_buscada = (await mos(archivo, anio, pais));
